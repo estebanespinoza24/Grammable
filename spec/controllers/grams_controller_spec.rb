@@ -10,7 +10,7 @@ RSpec.describe GramsController, type: :controller do
       expect(response).to have_http_status(:forbidden)
     end
 
-     it "shouldn't let unauthenticated users destroy a gram" do
+    it "shouldn't let unauthenticated users destroy a gram" do
       gram = FactoryBot.create(:gram)
       delete :destroy, params: { id: gram.id }
       expect(response).to redirect_to new_user_session_path
@@ -77,8 +77,7 @@ RSpec.describe GramsController, type: :controller do
     end
   end
 
-
- describe "grams#edit action" do
+  describe "grams#edit action" do
     it "shouldn't let a user who did not create the gram edit a gram" do
       gram = FactoryBot.create(:gram)
       user = FactoryBot.create(:user)
@@ -146,9 +145,7 @@ RSpec.describe GramsController, type: :controller do
     end
   end
 
-
   describe "grams#create action" do
-
     it "should require users to be logged in" do
       post :create, params: { gram: { message: "Hello" } }
       expect(response).to redirect_to new_user_session_path
@@ -164,6 +161,7 @@ RSpec.describe GramsController, type: :controller do
           picture: fixture_file_upload("/picture.png", 'image/png')
         }
       }
+      
       expect(response).to redirect_to root_path
 
       gram = Gram.last
